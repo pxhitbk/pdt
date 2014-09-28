@@ -1,5 +1,10 @@
 package com.pdt.core.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="pdt_articles")
 public class Articles extends BaseEntity {
 	private static final long serialVersionUID = 1771888439559007889L;
 

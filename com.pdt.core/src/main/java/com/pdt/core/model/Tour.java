@@ -1,13 +1,24 @@
 package com.pdt.core.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
-@Table(name="adt_tour")
-public class Tour extends BaseEntity {
+@Table(name="pdt_tour")
+@Audited
+@Cacheable(true)
+public class Tour extends BaseEntity implements Comparable<Tour> {
 
 	private static final long serialVersionUID = 4534493609310679662L;
 	
@@ -26,6 +37,11 @@ public class Tour extends BaseEntity {
 	private SessionType sessionType;
 	private RegionType regionType;
 	private Priority priority;
+	
+	@Column(nullable=false, updatable=false, insertable=false)
+	private Long articlesId;
+	@OneToOne(fetch=FetchType.LAZY, cascade={CascadeType.REMOVE})
+	@JoinColumn(name="articlesId")
 	private Articles articles;
 	
 	public Tour() {}
@@ -90,7 +106,6 @@ public class Tour extends BaseEntity {
 	public void setToPrice(double toPrice) {
 		this.toPrice = toPrice;
 	}
-
 	public PriceUnit getPriceUnit() {
 		return priceUnit;
 	}
@@ -115,12 +130,16 @@ public class Tour extends BaseEntity {
 	public void setRegionType(RegionType regionType) {
 		this.regionType = regionType;
 	}
-	public Articles getArticles() {
-		return articles;
-	}
+
 	public void setArticles(Articles articles) {
 		this.articles = articles;
+		articlesId = articles.getId();
 	}
+	
+	public Long getArticlesId() {
+		return articlesId;
+	}
+
 	/**
 	 * @return the priority
 	 */
@@ -132,5 +151,25 @@ public class Tour extends BaseEntity {
 	 */
 	public void setPriority(Priority priority) {
 		this.priority = priority;
+	}
+
+	public int compareTo(Tour cmpTour) {
+		//Criteria 1: preset priority
+		int result = getPriority().getOrder() - cmpTour.getPriority().getOrder();
+		if (result == 0) {
+			//Criteria 2: nearest time next will have higher priority 
+			long currentTimeMil = System.currentTimeMillis();
+			long thisTourTimeMil = getBeginDate().getTime();
+			long cmpTourTimeMil = cmpTour.getBeginDate().getTime();
+			long order[] = new long[] {thisTourTimeMil, cmpTourTimeMil, currentTimeMil};
+			Arrays.sort(order);
+			 
+			if (currentTimeMil == order[0]) // {current, t1, t2}
+				result = thisTourTimeMil == order[1] ? 1 : -1; //thisTourTimeMil = t1 ? higher : lesser
+			else if (currentTimeMil == order[1]) // {t1, current, t2}
+				result = thisTourTimeMil == order[2] ? 1 : -1; //thisTourTimeMil = t2 ? higher : lesser
+		}
+		
+		return result;
 	}
 }

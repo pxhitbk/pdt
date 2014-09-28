@@ -7,8 +7,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name="adt_tourdest")
+@Audited
 public class TourDestination extends BaseEntity {
 	private static final long serialVersionUID = 3130670307693860214L;
 
@@ -61,5 +64,6 @@ public class TourDestination extends BaseEntity {
 	}
 	public void setTour(Tour tour) {
 		this.tour = tour;
+		tourId = tour.getId();
 	}
 }
