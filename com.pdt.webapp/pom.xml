@@ -7,11 +7,12 @@
     <artifactId>com.pdt.workplace</artifactId>
     <version>1.0</version>
   </parent>
-  <groupId>com.pdt.webapp</groupId>
+  
   <artifactId>com.pdt.webapp</artifactId>
   <packaging>war</packaging>
   <name>com.pdt.webapp Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  
   <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<vaadin.version>7.3.1</vaadin.version>
@@ -50,6 +51,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.pdt</groupId>
+			<artifactId>com.pdt.core</artifactId>
+			<version>1.0</version>
+		</dependency>
+	
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${springframework.version}</version>
@@ -75,11 +82,6 @@
 			<version>${springframework.security.version}</version>
 		</dependency>
 		<!-- Servlet, JSP -->
-		<dependency>
-			<groupId>com.prac</groupId>
-			<artifactId>com.prac.core</artifactId>
-			<version>1.0</version>
-		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -132,7 +134,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
@@ -140,7 +142,7 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<!-- As we are doing "inplace" GWT compilation, ensure the widgetset -->
 			<!-- directory is cleaned properly -->
 			<plugin>

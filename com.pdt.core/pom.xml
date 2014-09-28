@@ -7,20 +7,29 @@
     <artifactId>com.pdt.workplace</artifactId>
     <version>1.0</version>
   </parent>
-  <groupId>com.pdt.core</groupId>
+  
   <artifactId>com.pdt.core</artifactId>
-  <version>1.0</version>
   <name>com.pdt.core</name>
+  <packaging>jar</packaging>
+  
+  <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <testFailureIgnore>true</testFailureIgnore>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+  
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>

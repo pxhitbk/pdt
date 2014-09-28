@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="genericDao" class="com.pdt.core.dao.impl.GenericDaoImpl"/>
+	
+	<!-- PDT webapp service -->
+	<bean id="tourServiceImpl" class="com.pdt.core.service.impl.TourServiceImpl"/>
+	
+	<bean id="serviceResolver" factory-method="createServiceResolver" class="com.pdt.core.service.impl.ServiceResolver">
+		<constructor-arg>
+			<map>
+				<entry key="com.pdt.core.service.GenericDao" value-ref="genericDao"></entry>
+				<entry key="com.pdt.core.service.TourService" value-ref="tourServiceImpl"/>
+			</map>
+		</constructor-arg>
+	</bean>
+	
+</beans>
