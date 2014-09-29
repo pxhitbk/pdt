@@ -1,5 +1,9 @@
 package com.pdt.core.service;
 
-public interface TourService {
+import java.util.List;
 
+import com.pdt.core.model.TravelSubjectTourAssociation;
+
+public interface TourService {
+	List<TravelSubjectTourAssociation> createSubjectTours();
 }

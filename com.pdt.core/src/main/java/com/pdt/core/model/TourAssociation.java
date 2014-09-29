@@ -9,24 +9,27 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="assType")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "assType")
+@Table(name = "pdt_tourassociation")
 @Cacheable(true)
 public abstract class TourAssociation extends BaseEntity {
 	private static final long serialVersionUID = -3905723912349768508L;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tourId")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tourId")
 	private Tour tour;
-	@Column(nullable=false, insertable=false, updatable=false)
+	@Column(nullable = false, insertable = false, updatable = false)
 	private long tourId;
-	
+
 	public TourAssociation(final Tour tour) {
 		super();
 		this.tour = tour;
 	}
+
 	public long getTourId() {
 		return tourId;
 	}

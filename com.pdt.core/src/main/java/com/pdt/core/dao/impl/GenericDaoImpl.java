@@ -1,5 +1,6 @@
 package com.pdt.core.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,16 +12,16 @@ import com.pdt.core.dao.GenericDao;
 import com.pdt.core.model.BaseEntity;
 
 /**
- *
- *<p>
+ * 
+ * <p>
  * Simple implemented generic DAO for CRUD
- *</p>
- *
+ * </p>
+ * 
  * @author hungpx
  */
 @Transactional
 public class GenericDaoImpl implements GenericDao {
-	@PersistenceContext(unitName = "prac-webapp")
+	@PersistenceContext(unitName = "pdt-webapp")
 	private EntityManager entityManager;
 
 	public GenericDaoImpl() {
@@ -54,5 +55,14 @@ public class GenericDaoImpl implements GenericDao {
 
 	protected EntityManager getEntityManager() {
 		return entityManager;
+	}
+
+	@Override
+	public <T extends BaseEntity> List<T> insert(List<T> entities) {
+		List<T> result = new ArrayList<>();
+		for (T entity : entities) {
+			result.add(insert(entity));
+		}
+		return result;
 	}
 }

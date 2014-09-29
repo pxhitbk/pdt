@@ -8,10 +8,10 @@
 	<!-- PDT webapp service -->
 	<bean id="tourServiceImpl" class="com.pdt.core.service.impl.TourServiceImpl"/>
 	
-	<bean id="serviceResolver" factory-method="createServiceResolver" class="com.pdt.core.service.impl.ServiceResolver">
+	<bean id="serviceResolver" factory-method="createServiceResolver" class="com.pdt.core.util.ServiceResolver">
 		<constructor-arg>
 			<map>
-				<entry key="com.pdt.core.service.GenericDao" value-ref="genericDao"></entry>
+				<entry key="com.pdt.core.dao.GenericDao" value-ref="genericDao"></entry>
 				<entry key="com.pdt.core.service.TourService" value-ref="tourServiceImpl"/>
 			</map>
 		</constructor-arg>

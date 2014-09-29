@@ -7,7 +7,7 @@
 	<display-name>Webapp for adt</display-name>
 	<context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:com/prac/webapp/config/spring/*.xml</param-value>
+        <param-value>classpath*:com/pdt/webapp/config/spring/*.xml</param-value>
     </context-param>
     
     <listener>
@@ -20,7 +20,7 @@
 		<init-param>
 			<description>Vaadin UI to display</description>
 			<param-name>UI</param-name>
-			<param-value>com.prac.admin.page.TourManagementPage</param-value>
+			<param-value>com.pdt.cms.ui.CmsUI</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
@@ -34,7 +34,7 @@
     </servlet-mapping>
     
     <servlet>
-    	<servlet-name>prac-webapp</servlet-name>
+    	<servlet-name>pdt-webapp</servlet-name>
     	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     	<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -43,18 +43,18 @@
     </servlet>
     
     <servlet-mapping>
-    	<servlet-name>prac-webapp</servlet-name>
+    	<servlet-name>pdt-webapp</servlet-name>
     	<url-pattern>/</url-pattern>
     </servlet-mapping>
     
-    <filter> 
+<!--     <filter> 
 		<filter-name>springSecurityFilterChain</filter-name> 
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
 	</filter> 
 	<filter-mapping> 
 	<filter-name>springSecurityFilterChain</filter-name> 
 		<url-pattern>/*</url-pattern> 
-	</filter-mapping>
+	</filter-mapping> -->
     
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

@@ -12,7 +12,7 @@
 <aop:config>
 	<aop:aspect ref="com.pdt.util.TraceWebappFlowAspect">
 		<!-- the execution of any method defined in the servlet package -->
-		<aop:pointcut expression="execution(* com.prac.viettravel.service.impl.*.*(..))" id="traceServlet"/>
+		<aop:pointcut expression="execution(* com.pdt.core.service.impl.*.*(..))" id="traceServlet"/>
 		<!-- <aop:pointcut expression="execution(* org.springframework.web.servlet.DispatcherServlet.*(..))" id="traceServlet"/> -->
 		<aop:before method="before" pointcut-ref="traceServlet"/>
 		<aop:after method="after" pointcut-ref="traceServlet"/>

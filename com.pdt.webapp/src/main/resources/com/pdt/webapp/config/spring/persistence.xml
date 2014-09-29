@@ -10,20 +10,20 @@
 	<bean id="localEntityManagerFactoryBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="prac-webapp" />
+		<property name="persistenceUnitName" value="pdt-webapp" />
 		<property name="jpaVendorAdapter">
 			<bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>com.prac.model</value>
-				<value>com.prac.viettravel.model</value>
+				<value>com.pdt.core.model</value>
 			</list>
 		</property>
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.listeners.envers.autoRegister">false</prop>
 			</props>
 		</property>
 	</bean>
@@ -31,7 +31,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/PracWebapp"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/pdt?charset=utf8&amp;useUnicode=true&amp;characterEncoding=utf-8"></property>
 		<property name="username" value="root" />
 		<property name="password" value="phamhung" />
 	</bean>
